@@ -9,7 +9,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
   <INSTANCE_CONNECTION_NAME>poc-iot:asia-east1:instance01</INSTANCE_CONNECTION_NAME>
     <user>root</user>
     <password>root</password>
-    <database>students</database>
+    <database>eyChatDB</database>
   </properties>
 <dependencies>
 	<dependency>
