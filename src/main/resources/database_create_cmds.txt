@@ -1,0 +1,104 @@
+CREATE TABLE User (
+User_ID INT NOT NULL AUTO_INCREMENT, 
+Email VARCHAR(50) NOT NULL, 
+Password VARCHAR(20), 
+Status VARCHAR(20) NOT NULL, 
+IsAdmin VARCHAR(5) NOT NULL,
+account_creation_date DATE NOT NULL,  
+PRIMARY KEY ( User_ID )
+);
+
+CREATE TABLE Event_Type (
+event_id INT NOT NULL AUTO_INCREMENT, 
+event_name VARCHAR(50) NOT NULL, 
+PRIMARY KEY ( event_id )
+);
+
+CREATE TABLE Event_Log (
+Log_ID INT NOT NULL AUTO_INCREMENT, 
+Event_Description VARCHAR(50) NOT NULL, 
+Event_id INT REFERENCES Event_Type(event_id),
+User_ID INT REFERENCES User(User_ID),
+Timestamp TIMESTAMP,
+PRIMARY KEY ( Log_ID )
+);
+
+CREATE TABLE Chat_session (
+chat_session_id INT NOT NULL AUTO_INCREMENT, 
+user_id INT REFERENCES Event_Type(event_id), 
+StartTime TIMESTAMP,
+EndTime TIMESTAMP,
+PRIMARY KEY ( chat_session_id )
+);
+
+CREATE TABLE Chat_Session_Details(
+chat_id INT NOT NULL AUTO_INCREMENT, 
+chat_session_id INT REFERENCES Event_Type(event_id), 
+chat_entry VARCHAR(50) NOT NULL,
+timestamp TIMESTAMP,
+PRIMARY KEY ( chat_id )
+);
+
+CREATE TABLE Email Support Details(
+Support_ID INT NOT NULL AUTO_INCREMENT, 
+chat_session_id INT REFERENCES Event_Type(event_id), 
+chat_entry VARCHAR(50) NOT NULL,
+timestamp TIMESTAMP,
+PRIMARY KEY ( Support_ID )
+);
+//////////////////remaining tables////////
+
+CREATE TABLE Topics (
+topic_id INT NOT NULL AUTO_INCREMENT, 
+topic_name VARCHAR(50) NOT NULL, 
+Synonyms VARCHAR(100), 
+PRIMARY KEY( topic_id )
+);
+
+CREATE TABLE SubTopics (
+sub_topic_id INT NOT NULL AUTO_INCREMENT, 
+sub_topic_name VARCHAR(50) NOT NULL, 
+topic_id INT REFERENCES Topics(topic_id),
+Synonyms VARCHAR(100), 
+PRIMARY KEY( sub_topic_id )
+);
+
+
+CREATE TABLE Country (
+country_id INT NOT NULL AUTO_INCREMENT, 
+country_name VARCHAR(30) NOT NULL, 
+PRIMARY KEY( country_id )
+);
+
+CREATE TABLE State (
+state_id INT NOT NULL AUTO_INCREMENT, 
+state_name VARCHAR(30) NOT NULL, 
+country_id INT REFERENCES Country(country_id),
+PRIMARY KEY( state_id )
+);
+
+//need to set sql_mode = '' to add ModifiedTimestamp
+
+CREATE TABLE Law_Description (
+law_desc_id INT NOT NULL AUTO_INCREMENT, 
+law_description TEXT NOT NULL, 
+state_id INT REFERENCES State(state_id),
+country_id INT REFERENCES Country(country_id),
+sub_topic_id INT REFERENCES Topics(topic_id),
+CreateTimeStamp TIMESTAMP, 
+ModifiedTimestamp TIMESTAMP,
+PRIMARY KEY( law_desc_id )
+);
+
+
+CREATE TABLE QuestionsMgnt (
+question_id INT NOT NULL AUTO_INCREMENT, 
+possible_questions NVARCHAR(500) NOT NULL, 
+law_desc_id INT REFERENCES Law_Description(law_desc_id),
+topic_id INT REFERENCES Topics(topic_id),
+sub_topic_id INT REFERENCES SubTopics(sub_topic_id),
+questions_type VARCHAR(20) NOT NULL,
+User_ID INT REFERENCES User(User_ID), 
+Timestamp TIMESTAMP,
+PRIMARY KEY( question_id )
+);

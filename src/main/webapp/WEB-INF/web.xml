@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  
+  <servlet>
+    <description></description>
+    <display-name>ComplianceDB</display-name>
+    <servlet-name>ComplianceDB</servlet-name>
+    <servlet-class>com.example.ComplianceDB</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ComplianceDB</servlet-name>
+    <url-pattern>/ComplianceDB</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddGeo</display-name>
+    <servlet-name>AddGeo</servlet-name>
+    <servlet-class>com.example.AddGeo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddGeo</servlet-name>
+    <url-pattern>/AddGeo</url-pattern>
+  </servlet-mapping>
 </web-app>
